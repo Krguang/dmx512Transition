@@ -40,6 +40,7 @@
 #include "main.h"
 #include "stm32f1xx_hal.h"
 #include "dma.h"
+#include "tim.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -137,7 +138,9 @@ int main(void)
   MX_DMA_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim3);
   if (HAL_UART_Receive_DMA(&huart2, (uint8_t *)&usart2_rx_buffer, 128) != HAL_OK)    Error_Handler();
   __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
   /* USER CODE END 2 */
@@ -153,10 +156,7 @@ int main(void)
 	  if (usart2_rx_flag == 1)
 	  {
 		  
-		  
 		  if ((usart2_tx_buffer[0] == 0xc8)&&(usart2_tx_buffer[1] == 0x01)&&(usart2_tx_buffer[2] == 0x01)  ) {
-
-			  HAL_UART_Transmit(&huart1, usart2_tx_buffer, usart2_tx_len, 0xff);
 
 			  sum = usart2_tx_buffer[5] + usart2_tx_buffer[7] + usart2_tx_buffer[9] + usart2_tx_buffer[11] + 10;
 			  low = sum & 0xff;
@@ -173,7 +173,7 @@ int main(void)
 				  DMX_buf[3] = g;
 				  DMX_buf[4] = b;
 				  DMX_buf[5] = w;
-				  DMX_SendPacket();
+				  
 			  }
 		  }
 		  usart2_rx_flag = 0;
@@ -233,6 +233,16 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if (htim == &htim3)
+	{
+		HAL_GPIO_TogglePin(led_out_GPIO_Port, led_out_Pin);
+		DMX_SendPacket();
+	}
+}
 
 /* USER CODE END 4 */
 
