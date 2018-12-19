@@ -81,6 +81,7 @@
   <ItemGroup>
     <ClCompile Include="..\Src\gpio.c" />
     <ClCompile Include="..\Src\dma.c" />
+    <ClCompile Include="..\Src\modbusSlave.c" />
     <ClCompile Include="..\Src\usart.c" />
     <ClCompile Include="..\Src\stm32f1xx_it.c" />
     <ClCompile Include="..\Src\stm32f1xx_hal_msp.c" />
@@ -102,6 +103,7 @@
     <ClCompile Include="$(BSP_ROOT)\STM32F1xxxx\StartupFiles\startup_stm32f103xb.c" />
     <ClInclude Include="..\Inc\gpio.h" />
     <ClInclude Include="..\Inc\dma.h" />
+    <ClInclude Include="..\Inc\modbusSlave.h" />
     <ClInclude Include="..\Inc\usart.h" />
     <ClInclude Include="..\Inc\stm32f1xx_it.h" />
     <ClInclude Include="..\Inc\stm32f1xx_hal_conf.h" />

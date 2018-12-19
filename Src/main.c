@@ -45,7 +45,7 @@
 #include "gpio.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "modbusSlave.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -153,6 +153,15 @@ int main(void)
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
+
+	  modbusSlaveScan();
+
+
+	  for (size_t i = 0; i < 64; i++)
+	  {
+		  DMX_buf[i] = localArray[i];
+	  }
+	  /*
 	  if (usart2_rx_flag == 1)
 	  {
 		  
@@ -173,11 +182,12 @@ int main(void)
 				  DMX_buf[3] = g;
 				  DMX_buf[4] = b;
 				  DMX_buf[5] = w;
-				  
 			  }
 		  }
 		  usart2_rx_flag = 0;
 	  }
+
+	  */
   }
   /* USER CODE END 3 */
 

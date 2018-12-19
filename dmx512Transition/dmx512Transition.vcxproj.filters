@@ -255,5 +255,13 @@
     <ClInclude Include="..\Inc\tim.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClCompile Include="..\Src\modbusSlave.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Inc\modbusSlave.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
