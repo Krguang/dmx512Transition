@@ -46,6 +46,7 @@
 
 /* USER CODE BEGIN Includes */
 #include "modbusSlave.h"
+#include "stmFlash.h"
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -64,6 +65,16 @@ void SystemClock_Config(void);
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
+
+long unsigned int UserBaudRate;
+unsigned char UserSlaveAdd;
+uint16_t tempArray[3];
+
+uint8_t slaveAddTemp;
+uint32_t baudRateTemp;
+
+
+#define FLASH_SAVE_ADDR  0X0800EA60		//设置FLASH 保存地址(必须为偶数，且其值要大于本代码所占用FLASH的大小+0X08000000)
 
 unsigned char usart2_rx_buffer[128];
 unsigned char usart2_tx_buffer[128];
@@ -104,6 +115,43 @@ void DMX_SendPacket(void)
 	}
 }
 
+
+static void connectParameterInit()
+{
+	STMFLASH_Read(FLASH_SAVE_ADDR, tempArray, 3);
+	
+	if (tempArray[0] == 0xffff)
+	{
+		tempArray[0] = 1;
+	}
+
+	if ((tempArray[1] == 0xffff)&&(tempArray[2] == 0xffff))
+	{
+		tempArray[1] = 0;
+		tempArray[2] = 9600;
+	}
+
+	UserBaudRate = (tempArray[1] << 16) + tempArray[2];
+	UserSlaveAdd = (tempArray[0] & 0x00ff);
+}
+
+static void parameterProcessing()
+{
+	if (slaveAddTemp != localArray[100])
+	{
+		slaveAddTemp = localArray[100];
+		UserSlaveAdd = localArray[100];
+		STMFLASH_Write(FLASH_SAVE_ADDR, localArray+100, 1);
+	}
+
+	if (baudRateTemp != ((localArray[101] << 16) + localArray[102]))
+	{
+		baudRateTemp = ((localArray[101] << 16) + localArray[102]);
+		UserBaudRate = ((localArray[101] << 16) + localArray[102]);
+		STMFLASH_Write(FLASH_SAVE_ADDR+2, localArray + 101, 2);
+	}
+}
+
 /* USER CODE END 0 */
 
 /**
@@ -130,7 +178,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  connectParameterInit();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -143,6 +191,8 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim3);
   if (HAL_UART_Receive_DMA(&huart2, (uint8_t *)&usart2_rx_buffer, 128) != HAL_OK)    Error_Handler();
   __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
+
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -155,7 +205,11 @@ int main(void)
   /* USER CODE BEGIN 3 */
 
 	  modbusSlaveScan();
+	  parameterProcessing();
 
+	  localArray[0] = UserSlaveAdd;
+	  localArray[1] = (UserBaudRate >> 16);
+	  localArray[2] = UserBaudRate&0xffff;
 
 	  for (size_t i = 0; i < 64; i++)
 	  {

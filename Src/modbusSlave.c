@@ -1,7 +1,6 @@
 #include "modbusSlave.h"
 #include "usart.h"
 
-uint8_t slaveAdd = 2;
 uint16_t localArray[128];
 
 static uint16_t GetCRC16(uint8_t *arr_buff, uint8_t len) {  //CRC校验程序
@@ -28,7 +27,7 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 	unsigned int  crc;
 	unsigned char crch, crcl;
 
-	if (MDbuf[0] != slaveAdd) return;								//地址相符时，再对本帧数据进行校验
+	if (MDbuf[0] != UserSlaveAdd) return;								//地址相符时，再对本帧数据进行校验
 	crc = GetCRC16(MDbuf, len - 2);								//计算CRC校验值
 	crch = crc >> 8;
 	crcl = crc & 0xFF;
@@ -37,7 +36,7 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 	switch (MDbuf[1]) {											//地址和校验字均相符后，解析功能码，执行相关操作
 
 	case 0x03:											//读取一个或连续的寄存器
-		if ((MDbuf[2] == 0x00) && (MDbuf[3] <= 0x20)) {			//只支持0x0000～0x0020
+		if ((MDbuf[2] == 0x00) && (MDbuf[3] <= 0x80)) {			//只支持0x0000～0x0080
 			i = MDbuf[3];									//提取寄存器地址
 			cnt = MDbuf[5];									//提取待读取的寄存器数量
 			MDbuf[2] = cnt * 2;								//读取数据的字节数，为寄存器数*2
@@ -73,7 +72,7 @@ static void ModbusDecode(unsigned char *MDbuf, unsigned char len) {
 		break;
 		*/
 	case 0x10:
-		if ((MDbuf[2] == 0x00) && (MDbuf[3] <= 0x20)) {		//寄存器地址支持0x0000～0x0020
+		if ((MDbuf[2] == 0x00) && (MDbuf[3] <= 0x80)) {		//寄存器地址支持0x0000～0x0080
 			i = MDbuf[3];									//提取寄存器地址
 			cnt = MDbuf[5];									//提取待写入的寄存器数量
 			unsigned char startNum = 7;						//设置读取将要写入的数据的地址

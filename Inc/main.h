@@ -69,6 +69,9 @@ extern unsigned char usart2_rx_buffer[];
 extern unsigned char usart2_tx_buffer[];
 extern unsigned int usart2_tx_len;
 extern unsigned char usart2_rx_flag;
+
+extern long unsigned int UserBaudRate;
+extern unsigned char UserSlaveAdd;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

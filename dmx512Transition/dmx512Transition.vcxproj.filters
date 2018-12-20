@@ -258,9 +258,15 @@
     <ClCompile Include="..\Src\modbusSlave.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Src\stmFlash.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Inc\modbusSlave.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Inc\stmFlash.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

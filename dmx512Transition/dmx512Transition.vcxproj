@@ -82,6 +82,7 @@
     <ClCompile Include="..\Src\gpio.c" />
     <ClCompile Include="..\Src\dma.c" />
     <ClCompile Include="..\Src\modbusSlave.c" />
+    <ClCompile Include="..\Src\stmFlash.c" />
     <ClCompile Include="..\Src\usart.c" />
     <ClCompile Include="..\Src\stm32f1xx_it.c" />
     <ClCompile Include="..\Src\stm32f1xx_hal_msp.c" />
@@ -104,6 +105,7 @@
     <ClInclude Include="..\Inc\gpio.h" />
     <ClInclude Include="..\Inc\dma.h" />
     <ClInclude Include="..\Inc\modbusSlave.h" />
+    <ClInclude Include="..\Inc\stmFlash.h" />
     <ClInclude Include="..\Inc\usart.h" />
     <ClInclude Include="..\Inc\stm32f1xx_it.h" />
     <ClInclude Include="..\Inc\stm32f1xx_hal_conf.h" />
