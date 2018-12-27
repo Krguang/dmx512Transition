@@ -207,10 +207,6 @@ int main(void)
 	  modbusSlaveScan();
 	  parameterProcessing();
 
-	  localArray[0] = UserSlaveAdd;
-	  localArray[1] = (UserBaudRate >> 16);
-	  localArray[2] = UserBaudRate&0xffff;
-
 	  for (size_t i = 0; i < 64; i++)
 	  {
 		  DMX_buf[i] = localArray[i];

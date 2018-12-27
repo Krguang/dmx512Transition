@@ -71,7 +71,6 @@ void MX_USART1_UART_Init(void)
   {
     _Error_Handler(__FILE__, __LINE__);
   }
-
 }
 /* USART2 init function */
 
