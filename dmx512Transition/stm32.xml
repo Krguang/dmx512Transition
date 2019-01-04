@@ -45,7 +45,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\dmx512Transition.gpdsc</RelativePath>
-        <Timestamp>131868084919740453</Timestamp>
+        <Timestamp>131905440527214712</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -87,6 +87,17 @@
                 </VirtualFileSnapshot>
                 <VirtualFileSnapshot>
                   <RelativePath>..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c</RelativePath>
+                </VirtualFileSnapshot>
+              </Files>
+            </VirtualDirectorySnapshot>
+            <VirtualDirectorySnapshot>
+              <Name>IWDG</Name>
+              <Files>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_iwdg.h</RelativePath>
+                </VirtualFileSnapshot>
+                <VirtualFileSnapshot>
+                  <RelativePath>..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_iwdg.c</RelativePath>
                 </VirtualFileSnapshot>
               </Files>
             </VirtualDirectorySnapshot>
@@ -217,6 +228,9 @@
           <RelativePath>..\Inc\dma.h</RelativePath>
         </VirtualFileSnapshot>
         <VirtualFileSnapshot>
+          <RelativePath>..\Inc\iwdg.h</RelativePath>
+        </VirtualFileSnapshot>
+        <VirtualFileSnapshot>
           <RelativePath>..\Inc\tim.h</RelativePath>
         </VirtualFileSnapshot>
         <VirtualFileSnapshot>
@@ -236,6 +250,9 @@
         </VirtualFileSnapshot>
         <VirtualFileSnapshot>
           <RelativePath>..\Src\dma.c</RelativePath>
+        </VirtualFileSnapshot>
+        <VirtualFileSnapshot>
+          <RelativePath>..\Src\iwdg.c</RelativePath>
         </VirtualFileSnapshot>
         <VirtualFileSnapshot>
           <RelativePath>..\Src\tim.c</RelativePath>

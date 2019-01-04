@@ -91,6 +91,12 @@
     <Filter Include="VisualGDB settings">
       <UniqueIdentifier>{a971fb7f-397e-45ac-b3d2-837090675485}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source files\STM32Cube HAL\IWDG">
+      <UniqueIdentifier>{187109d5-587f-457c-a49b-8a8df67f8e24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\STM32Cube HAL\IWDG">
+      <UniqueIdentifier>{1e45464b-3a7d-4ec2-8cfa-99193835b141}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Makefile" />
@@ -254,6 +260,18 @@
     </ClCompile>
     <ClInclude Include="..\Inc\tim.h">
       <Filter>Header files</Filter>
+    </ClInclude>
+    <ClCompile Include="..\Src\iwdg.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_iwdg.c">
+      <Filter>Source files\STM32Cube HAL\IWDG</Filter>
+    </ClCompile>
+    <ClInclude Include="..\Inc\iwdg.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_iwdg.h">
+      <Filter>Header files\STM32Cube HAL\IWDG</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
